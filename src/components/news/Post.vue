@@ -15,7 +15,8 @@
                     <div class="card-text hidden-md-down">
                         <span class="text-success">{{ decodeURIComponent(item.url) }}</span>
                     </div>
-                    <div class="card-text news-text" v-if="item.description" v-html="decodeHtml(item.description)"></div>
+                    <div class="card-text news-text" v-if="item.description"
+                         v-html="decodeHtml(item.description)"></div>
                     <div class="card-text">
                         <table class="table table-sm table-bordered">
                             <tr>
@@ -68,8 +69,5 @@
                 return json.length;
             },
         },
-        mounted() {
-            console.log(this.item.clicks);
-        }
     }
 </script>

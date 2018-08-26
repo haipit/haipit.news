@@ -1,5 +1,10 @@
 <template>
     <div class="row blocks">
+
+        <!--<input type="hidden" v-shortkey="{up: ['arrowup'], down: ['arrowdown']}" @shortkey="theAction()"/>-->
+        <input type="hidden" v-shortkey="['ctrl', 'arrowleft']" @shortkey="changePage(0)"/>
+        <input type="hidden" v-shortkey="['ctrl', 'arrowright']" @shortkey="changePage(1)"/>
+
         <post v-for="item in posts" v-bind:item="item"/>
         <div class="col-12" v-show="!found">
             <h2>No results were found. Try changing the keyword!</h2>
@@ -38,30 +43,45 @@
                 found: true,
                 // TODO: Alarm crapcode detected
                 pages: 100,
+                currentPage: 1,
                 limit: 30,
-                offset: 0,
-                currentPage: 0
+                offset: 0
             };
         },
         props: {
             page: Number,
         },
         methods: {
-            getNews: function () {
+            changePage: function (moveTo) {
+                let page = this.currentPage;
+                console.log(moveTo + ' ' + page);
+                switch (moveTo) {
+                    case 0:
+                        if (page > 1) page = page - 1;
+                        break;
+                    case 1:
+                        //if (page <= 100) page = page + 1;
+                        page = page + 1;
+                        break;
+                }
+                console.log(page);
+                this.clickCallback(page);
+            },
+            getNews: async function () {
                 // Renew limit and offset by page number
                 this.getLimits();
-                this.$http.get(`${this.API}/news?limit=` + this.limit + '&offset=' + this.offset)
-                    .then(response => {
-                        this.posts = response.data.result;
-                    })
+                const {data} = await this.$http.get(`${this.API}/news?limit=${this.limit}&offset=${this.offset}`);
+                this.posts = data.result;
             },
             getLimits: function () {
-                if (this.page !== undefined) this.currentPage = this.page;
                 this.limit = 30;
-                this.offset = this.currentPage * this.limit;
+                this.offset = (this.page - 1) * this.limit;
             },
             clickCallback: function (pageNum) {
+                console.log(pageNum);
+                this.page = pageNum;
                 this.currentPage = pageNum;
+                this.scrollToTop();
                 this.getNews();
             }
         },
@@ -69,7 +89,7 @@
             Post
         },
         mounted() {
-            this.getNews()
-        },
+            this.getNews();
+        }
     }
 </script>
