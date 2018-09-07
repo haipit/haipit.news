@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div class="row blocks">
         <post v-for="item in posts" v-bind:item="item"/>
         <div class="col-12" v-show="!found">
             <h2>No results were found. Try changing the keyword!</h2>
@@ -15,25 +15,32 @@
         name: "Search",
         data() {
             return {
-                all: [],
                 posts: [],
-                found: true
+                found: true,
+                // TODO: Alarm crapcode detected
+                pages: 100,
+                currentPage: 1,
+                limit: 30,
+                offset: 0
             };
         },
         props: {
             keyword: String,
         },
         methods: {
-            getSearch: function () {
+            getSearch: async function () {
                 serverBus.$emit('searchKeyword', this.keyword);
-                this.$http.get(`${this.API}/news/search/${this.keyword}`)
-                    .then(response => {
-                        let self = this;
-                        if (response.data.length < 1) self.found = false;
-                        this.all = response.data;
-                        this.posts = response.data.result;
-                    })
-            }
+                // Renew limit and offset by page number
+                this.getLimits();
+                //const {data} = await this.$http.get(`${this.API}/news/search?limit=${this.limit}&offset=${this.offset}`);
+                const {data} = await this.$http.get(`${this.API}/news?limit=${this.limit}&offset=${this.offset}`);
+                this.posts = data.result;
+                if (data.result.length < 1) this.found = false;
+            },
+            getLimits: function () {
+                this.limit = 30;
+                this.offset = (this.page - 1) * this.limit;
+            },
         },
         components: {
             Post

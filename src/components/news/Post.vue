@@ -21,12 +21,8 @@
                         <table class="table table-sm table-bordered">
                             <tr>
                                 <td>
-                                    <span class="text-muted"><i class="fa fa-fw fa-eye"></i> {{
-                                        (item.clicks !== undefined)
-                                        ? decodeJson(item.clicks)
-                                        : '0'
-                                        }}
-                                    </span>
+                                    <span class="text-muted"><i
+                                            class="fa fa-fw fa-eye"></i>&nbsp;{{ item.clicks }}</span>
                                 </td>
                                 <td>
                                     <router-link :to="{path: '/news?src=' + item.id_source}">
@@ -48,25 +44,18 @@
 <script>
     export default {
         name: 'Post',
-        data() {
-            return {
-                today: this.DateFns.format(new Date(), "YYYY-MM-DD")
-            };
-        },
         props: {
             item: Object,
         },
         methods: {
             stat: function (id) {
+                console.log(`${this.API}/stats ` + id);
                 this.$http.post(`${this.API}/stats`, {id: id});
             },
             decodeHtml: function (html) {
                 let txt = document.createElement("textarea");
                 txt.innerHTML = html;
                 return txt.value;
-            },
-            decodeJson: function (json) {
-                return json.length;
             },
         },
     }

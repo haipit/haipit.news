@@ -1,10 +1,5 @@
 <template>
     <div class="row blocks">
-
-        <!--<input type="hidden" v-shortkey="{up: ['arrowup'], down: ['arrowdown']}" @shortkey="theAction()"/>-->
-        <input type="hidden" v-shortkey="['ctrl', 'arrowleft']" @shortkey="changePage(0)"/>
-        <input type="hidden" v-shortkey="['ctrl', 'arrowright']" @shortkey="changePage(1)"/>
-
         <post v-for="item in posts" v-bind:item="item"/>
         <div class="col-12" v-show="!found">
             <h2>No results were found. Try changing the keyword!</h2>
@@ -29,6 +24,8 @@
                 </div>
             </div>
         </nav>
+        <input type="hidden" v-shortkey="['ctrl', 'arrowleft']" @shortkey="changePage(0)"/>
+        <input type="hidden" v-shortkey="['ctrl', 'arrowright']" @shortkey="changePage(1)"/>
     </div>
 </template>
 
@@ -54,7 +51,6 @@
         methods: {
             changePage: function (moveTo) {
                 let page = this.currentPage;
-                console.log(moveTo + ' ' + page);
                 switch (moveTo) {
                     case 0:
                         if (page > 1) page = page - 1;
@@ -64,7 +60,6 @@
                         page = page + 1;
                         break;
                 }
-                console.log(page);
                 this.clickCallback(page);
             },
             getNews: async function () {
@@ -78,7 +73,6 @@
                 this.offset = (this.page - 1) * this.limit;
             },
             clickCallback: function (pageNum) {
-                console.log(pageNum);
                 this.page = pageNum;
                 this.currentPage = pageNum;
                 this.scrollToTop();
