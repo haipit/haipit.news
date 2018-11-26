@@ -13,22 +13,22 @@
 </template>
 
 <script>
-    import {serverBus} from '../../main';
-
-    export default {
-        name: 'Search',
-        methods: {
-            letsFind() {
-                let keywords = this.$refs.my_search.value;
-                this.$router.push('/search/' + keywords);
-                this.$router.go(0);
-            }
-        },
-        created() {
-            // Using the service bus
-            serverBus.$on('searchKeyword', (text) => {
-                this.$refs.my_search.value = text;
-            });
-        }
-    }
+    // import {serverBus} from '../../main';
+    //
+    // export default {
+    //     name: 'Search',
+    //     methods: {
+    //         letsFind() {
+    //             let keywords = this.$refs.my_search.value;
+    //             this.$router.push('/search/' + keywords);
+    //             this.$router.go(0);
+    //         }
+    //     },
+    //     created() {
+    //         // Using the service bus
+    //         serverBus.$on('searchKeyword', (text) => {
+    //             this.$refs.my_search.value = text;
+    //         });
+    //     }
+    // }
 </script>

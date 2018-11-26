@@ -5,9 +5,7 @@
                 <div class="card-block p-4 block-item">
                     <div class="card-title">
                         <h5 class="news-link">
-                            <a target="_blank" class="last"
-                               v-bind:href="decodeURIComponent(item.url)"
-                               @click="stat(item._id)">
+                            <a target="_blank" class="last" v-bind:href="decodeURIComponent(item.url)" @click="stat(item.id)">
                                 {{ item.title }}
                             </a>
                         </h5>
@@ -21,12 +19,11 @@
                         <table class="table table-sm table-bordered">
                             <tr>
                                 <td>
-                                    <span class="text-muted"><i
-                                            class="fa fa-fw fa-eye"></i>&nbsp;{{ item.clicks }}</span>
+                                    <span class="text-muted"><i class="fa fa-fw fa-eye"></i>&nbsp;{{ item.clicks_count }}</span>
                                 </td>
                                 <td>
-                                    <router-link :to="{path: '/news?src=' + item.id_source}">
-                                        {{ item.source_title }}
+                                    <router-link :to="{path: '/news?src=' + item.source.id}">
+                                        {{ item.source.title }}
                                     </router-link>
                                 </td>
                                 <td>
@@ -43,12 +40,12 @@
 
 <script>
     export default {
-        name: 'Post',
-        props: {
+        name:    'Post',
+        props:   {
             item: Object,
         },
         methods: {
-            stat: function (id) {
+            stat:       function (id) {
                 console.log(`${this.API}/stats ` + id);
                 this.$http.post(`${this.API}/stats`, {id: id});
             },

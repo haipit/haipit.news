@@ -1,15 +1,15 @@
 <template>
     <div class="row blocks">
-        <post v-for="item in posts" v-bind:item="item"/>
-        <div class="col-12" v-show="!found">
-            <h2>No results were found. Try changing the keyword!</h2>
-        </div>
+        <post v-for="item in news.data" v-bind:item="item"/>
+        <!--<div class="col-12" v-show="news.data.length() > 0">-->
+        <!--<h2>No results were found. Try changing the keyword!</h2>-->
+        <!--</div>-->
         <nav class="navbar fixed-bottom">
             <div class="container">
                 <div class="col-12 pt-4 text-xs-center">
                     <paginate
                             v-model="page"
-                            :page-count="pages"
+                            :page-count="news.per_page || 0"
                             :page-range="3"
                             :margin-pages="2"
                             :click-handler="clickCallback"
@@ -30,60 +30,59 @@
 </template>
 
 <script>
-    import Post from "./Post.vue"
+    import Post                               from "./layout/Post.vue"
+    import {mapState, mapActions, mapGetters} from "vuex";
 
     export default {
-        name: 'News',
+        name:       'News',
         data() {
             return {
-                posts: [],
-                found: true,
-                // TODO: Alarm crapcode detected
-                pages: 100,
                 currentPage: 1,
-                limit: 30,
-                offset: 0
+                found:       false
             };
         },
-        props: {
+        props:      {
             page: Number,
         },
-        methods: {
-            changePage: function (moveTo) {
+        methods:    {
+            changePage:    function (moveTo) {
                 let page = this.currentPage;
                 switch (moveTo) {
                     case 0:
                         if (page > 1) page = page - 1;
                         break;
                     case 1:
-                        //if (page <= 100) page = page + 1;
                         page = page + 1;
                         break;
                 }
                 this.clickCallback(page);
             },
-            getNews: async function () {
-                // Renew limit and offset by page number
-                this.getLimits();
-                const {data} = await this.$http.get(`${this.API}/news?limit=${this.limit}&offset=${this.offset}`);
-                this.posts = data.result;
-            },
-            getLimits: function () {
-                this.limit = 30;
-                this.offset = (this.page - 1) * this.limit;
-            },
             clickCallback: function (pageNum) {
                 this.page = pageNum;
                 this.currentPage = pageNum;
                 this.scrollToTop();
-                this.getNews();
-            }
+                this.getNews(pageNum);
+            },
+            ...mapActions([
+                'scrollToTop',
+
+            ]),
+            ...mapGetters([
+                'getNews',
+            ])
+        },
+        mounted() {
+            //console.log(this.news);
         },
         components: {
             Post
         },
-        mounted() {
-            this.getNews();
+        computed:   {
+            ...mapState([
+                'news',
+                'sources'
+            ]),
         }
+
     }
 </script>

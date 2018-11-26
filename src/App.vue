@@ -21,13 +21,24 @@
 </style>
 
 <script>
-    import Navbar from "./components/layout/Navbar.vue"
-    import Footer from "./components/layout/Footer.vue"
+    import Navbar       from "./components/layout/Navbar.vue"
+    import Footer       from "./components/layout/Footer.vue"
+    import {mapActions} from "vuex";
 
     export default {
-        name: 'App',
+        name:       'App',
         components: {
             Navbar, Footer
         },
+        mounted() {
+            this.refreshNews();
+            this.refreshSources();
+        },
+        methods:    {
+            ...mapActions([
+                'refreshNews',
+                'refreshSources'
+            ])
+        }
     }
 </script>
