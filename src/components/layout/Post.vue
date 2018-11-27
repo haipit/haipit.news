@@ -5,13 +5,13 @@
                 <div class="card-block p-4 block-item">
                     <div class="card-title">
                         <h5 class="news-link">
-                            <a target="_blank" class="last" v-bind:href="decodeURIComponent(item.url)" @click="stat(item.id)">
+                            <a target="_blank" class="last" v-bind:href="decodeURIComponent(item.link)" @click="stat(item.id)">
                                 {{ item.title }}
                             </a>
                         </h5>
                     </div>
                     <div class="card-text hidden-md-down">
-                        <span class="text-success">{{ decodeURIComponent(item.url) }}</span>
+                        <span class="text-success">{{ decodeURIComponent(item.link) }}</span>
                     </div>
                     <div class="card-text news-text" v-if="item.description"
                          v-html="decodeHtml(item.description)"></div>
