@@ -12,7 +12,7 @@ axios.interceptors.request.use(request => {
     //     request.headers.common['Authorization'] = `Bearer ${token}`
     // }
 
-    request.url = `http://api.haipit.test/api/v2/${request.url}`;
+    request.url = `https://api.haipit.new/api/v2/${request.url}`;
     return request
 });
 
