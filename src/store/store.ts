@@ -12,13 +12,15 @@ axios.interceptors.request.use(request => {
   //     request.headers.common['Authorization'] = `Bearer ${token}`
   // }
 
-  request.url = `http://api.haipit.test/api/v2/${request.url}`;
+  //request.url = `http://api.haipit.test/api/v2/${request.url}`;
+  request.url = `https://api.haipit.news/api/v2/${request.url}`;
   return request;
 });
 
 export default new Vuex.Store({
   state:     {
-    API:     "http://api.haipit.test/api/v2",
+    //API:     "http://api.haipit.test/api/v2",
+    API:     "https://api.haipit.news/api/v2",
     news:    [],
     content: [],
     sources: []
