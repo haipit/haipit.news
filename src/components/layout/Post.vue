@@ -60,7 +60,7 @@ export default class Post extends Vue {
   stat = id => {
     const { API } = this.$store.state;
 
-    console.log(`${API}/stats ` + id);
+    console.log(`${API}/stats ${id}`);
     this.$http.post(`${API}/stats/${id}`);
   };
 

@@ -52,7 +52,7 @@ export default new Vuex.Store({
             });
         },
         async refreshNews({ commit }, page = 1) {
-            const { data } = await axios.get(`news?page=` + page);
+            const { data } = await axios.get(`news?page=${page}`);
             commit("SET_NEWS", data);
         },
         async refreshSources({ commit }, page = 1) {
