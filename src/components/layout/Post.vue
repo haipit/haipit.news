@@ -31,7 +31,7 @@
                   </span>
                 </td>
                 <td>
-                  <router-link :to="{path: '/news?src=' + item.source.id}">{{ item.source.title }}</router-link>
+                  <router-link :to="{path: `/news?src=${item.source.id}`}">{{ item.source.title }}</router-link>
                 </td>
                 <td>
                   <span

@@ -81,6 +81,7 @@ export default class News extends Vue {
     this.currentPage = pageNum;
     this.scrollToTop();
     this.getNews(pageNum);
+    this.$store.dispatch("refreshNews", pageNum);
   };
 }
 </script>
