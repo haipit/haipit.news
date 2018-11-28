@@ -19,7 +19,7 @@
                 <b-navbar-nav class="ml-auto">
 
                     <b-nav-item target="_blank" href="https://github.com/haipit">GitHub</b-nav-item>
-                    <b-nav-item target="_blank" href="https://api.haipit.news/docs/">API Docs</b-nav-item>
+                    <b-nav-item target="_blank" href="https://api.haipit.news/api/documentation">API Docs</b-nav-item>
 
                     <search/>
 
