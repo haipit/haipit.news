@@ -1,6 +1,6 @@
 <template>
   <div class="row blocks">
-    <post v-for="item in news.data" v-bind:item="item"/>
+    <post v-for="item in news.data" v-bind:item="item" :key="item.id"/>
     <!--<div class="col-12" v-show="news.data.length() > 0">-->
     <!--<h2>No results were found. Try changing the keyword!</h2>-->
     <!--</div>-->
@@ -43,38 +43,44 @@ import Component from "vue-class-component";
     ...mapState(["news", "sources"])
   },
   methods: {
-    changePage: function(moveTo) {
-      let page = this.currentPage;
-      switch (moveTo) {
-        case 0:
-          if (page > 1) page = page - 1;
-          break;
-        case 1:
-          page = page + 1;
-          break;
-      }
-      this.clickCallback(page);
-    },
-    clickCallback: function(pageNum) {
-      this.page = pageNum;
-      this.currentPage = pageNum;
-      this.scrollToTop();
-      this.getNews(pageNum);
-    },
     ...mapActions(["scrollToTop"]),
     ...mapGetters(["getNews"])
+  },
+  props: {
+    page: Number
   }
 })
 export default class News extends Vue {
-  page = 0;
-  data() {
+  // computed
+  get data() {
     return {
       currentPage: 1,
       found: false
     };
   }
+
   mounted() {
     //console.log(this.news);
   }
+
+  changePage = moveTo => {
+    let page = this.currentPage;
+    switch (moveTo) {
+      case 0:
+        if (page > 1) page = page - 1;
+        break;
+      case 1:
+        page = page + 1;
+        break;
+    }
+    this.clickCallback(page);
+  };
+
+  clickCallback = pageNum => {
+    this.page = pageNum;
+    this.currentPage = pageNum;
+    this.scrollToTop();
+    this.getNews(pageNum);
+  };
 }
 </script>

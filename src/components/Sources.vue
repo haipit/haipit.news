@@ -10,8 +10,10 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 
-@Component({})
-export default class Source extends Vue {
-  item = Object;
-}
+@Component({
+  props: {
+    item: Object
+  }
+})
+export default class Source extends Vue {}
 </script>

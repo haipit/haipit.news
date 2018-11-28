@@ -1,5 +1,5 @@
-import Vue   from 'vue'
-import Vuex  from 'vuex'
+import Vue from 'vue'
+import Vuex from 'vuex'
 import axios from 'axios'
 
 Vue.use(Vuex);
@@ -17,8 +17,8 @@ axios.interceptors.request.use(request => {
 });
 
 export default new Vuex.Store({
-    state:     {
-        news:    [],
+    state: {
+        news: [],
         sources: [],
     },
     mutations: {
@@ -35,7 +35,7 @@ export default new Vuex.Store({
             state.sources = sources;
         },
     },
-    getters:   {
+    getters: {
         getNews(state) {
             return state.news;
         },
@@ -43,16 +43,27 @@ export default new Vuex.Store({
             return state.sources;
         },
     },
-    actions:   {
+    actions: {
         scrollToTop() {
-            scrollTo({top: 0, behavior: "smooth"});
+            scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
         },
-        async refreshNews({commit}, page = 1) {
-            const {data} = await axios.get(`news?page=` + page);
+        async refreshNews({
+            commit
+        }, page = 1) {
+            const {
+                data
+            } = await axios.get(`news?page=` + page);
             commit('SET_NEWS', data);
         },
-        async refreshSources({commit}, page = 1) {
-            const {data} = await axios.get(`sources?page=` + page);
+        async refreshSources({
+            commit
+        }, page = 1) {
+            const {
+                data
+            } = await axios.get(`sources?page=${page}`);
             commit('SET_SOURCES', data);
         },
     }

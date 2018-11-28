@@ -8,7 +8,9 @@
         о новинках в сфере высоких технологий из таких популярных источников как
         Хабрахабр, Linux.Org.Ru, OpenNet.Org, Hacker News и некоторые другие.
         С полным списком источников вы можете ознакомиться
-        <a href="#sources">чуть ниже</a>.
+        <a
+          href="#sources"
+        >чуть ниже</a>.
       </p>
 
       <p>
@@ -42,7 +44,10 @@
       <p>
         В настоящий момент у проекта всего один активный разработчик, Вы можете найти
         меня в Twitter под ником
-        <a href="https://twitter.com/EvilFreelancer" target="_blank">@EvilFreelancer</a>.
+        <a
+          href="https://twitter.com/EvilFreelancer"
+          target="_blank"
+        >@EvilFreelancer</a>.
       </p>
     </div>
 
@@ -65,7 +70,5 @@ import Component from "vue-class-component";
     Sources
   }
 })
-export default class About extends Vue {
-  item = Object;
-}
+export default class About extends Vue {}
 </script>
