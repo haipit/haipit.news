@@ -21,7 +21,7 @@ import "./assets/scss/theme.scss";
 
 // Pages
 import NewsAll from "./components/News.vue";
-// import About   from "./components/About.vue";
+import About from "./components/About.vue";
 // import Search  from "./components/Search.vue";
 
 // Default configs
@@ -29,15 +29,15 @@ Vue.prototype.DateFns = DateFns;
 Vue.config.productionTip = false;
 
 const routes = [
-    { path: "/", redirect: "/news" },
-    { path: "/news/:page", component: NewsAll, props: true },
-    { path: "/news", component: NewsAll }
-    // {path: '/about', component: About},
-    // {path: '/search/:keyword', component: Search, props: true},
+  {path: "/", redirect: "/news"},
+  {path: "/news/:page", component: NewsAll, props: true},
+  {path: "/news", component: NewsAll},
+  //{path: '/search/:keyword', component: Search, props: true},
+  {path: '/about', component: About, props: true},
 ];
 
 const router = new VueRouter({
-    routes // short for `routes: routes`
+  routes // short for `routes: routes`
 });
 
 Vue.use(Vuex);
@@ -46,20 +46,20 @@ Vue.use(VueShortkey);
 Vue.use(BootstrapVue);
 Vue.use(VueResource);
 Vue.use(VueMatomo, {
-    host: "https://stat.drteam.rocks",
-    siteId: 11,
-    router: router,
-    requireConsent: true,
-    trackInitialView: true
+  host:             "https://stat.drteam.rocks",
+  siteId:           11,
+  router:           router,
+  requireConsent:   true,
+  trackInitialView: true
 });
 Vue.use(VueAnalytics, {
-    id: "UA-98273338-1"
+  id: "UA-98273338-1"
 });
 
 Vue.component("paginate", Paginate);
 
 new Vue({
-    store,
-    render: h => h(App),
-    router: router
+  store,
+  render: h => h(App),
+  router: router
 }).$mount("#app");

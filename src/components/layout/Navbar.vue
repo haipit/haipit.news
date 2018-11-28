@@ -21,7 +21,7 @@
           <b-nav-item target="_blank" href="https://github.com/haipit">GitHub</b-nav-item>
           <b-nav-item target="_blank" href="https://api.haipit.news/api/documentation">API Docs</b-nav-item>
 
-          <search/>
+          <!--<search/>-->
 
           <!--<b-nav-item-dropdown text="Lang" right>-->
           <!--<b-dropdown-item href="#">EN</b-dropdown-item>-->

@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <div class="col-12">
-      <div class="card">
+      <div class="card news">
         <div class="card-block p-4 block-item">
           <div class="card-title">
             <h5 class="news-link">
