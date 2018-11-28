@@ -1,6 +1,6 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import axios from 'axios'
+import Vue from "vue";
+import Vuex from "vuex";
+import axios from "axios";
 
 Vue.use(Vuex);
 // import store from './store'
@@ -13,27 +13,28 @@ axios.interceptors.request.use(request => {
     // }
 
     request.url = `https://api.haipit.news/api/v2/${request.url}`;
-    return request
+    return request;
 });
 
 export default new Vuex.Store({
     state: {
+        API: "https://api.haipit.news/api/v2",
         news: [],
-        sources: [],
+        sources: []
     },
     mutations: {
         ADD_NEWS(state, news) {
-            state.news.push(news)
+            state.news.push(news);
         },
         ADD_SOURCE(state, source) {
-            state.sources.push(source)
+            state.sources.push(source);
         },
         SET_NEWS(state, coins) {
-            state.news = coins
+            state.news = coins;
         },
         SET_SOURCES(state, sources) {
             state.sources = sources;
-        },
+        }
     },
     getters: {
         getNews(state) {
@@ -41,7 +42,7 @@ export default new Vuex.Store({
         },
         getSources(state) {
             return state.sources;
-        },
+        }
     },
     actions: {
         scrollToTop() {
@@ -50,21 +51,13 @@ export default new Vuex.Store({
                 behavior: "smooth"
             });
         },
-        async refreshNews({
-            commit
-        }, page = 1) {
-            const {
-                data
-            } = await axios.get(`news?page=` + page);
-            commit('SET_NEWS', data);
+        async refreshNews({ commit }, page = 1) {
+            const { data } = await axios.get(`news?page=` + page);
+            commit("SET_NEWS", data);
         },
-        async refreshSources({
-            commit
-        }, page = 1) {
-            const {
-                data
-            } = await axios.get(`sources?page=${page}`);
-            commit('SET_SOURCES', data);
-        },
+        async refreshSources({ commit }, page = 1) {
+            const { data } = await axios.get(`sources?page=${page}`);
+            commit("SET_SOURCES", data);
+        }
     }
 });

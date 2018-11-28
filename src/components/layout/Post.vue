@@ -57,10 +57,12 @@ import Component from "vue-class-component";
   }
 })
 export default class Post extends Vue {
-  //   stat = id => {
-  //     console.log(`${this.API}/stats ` + id);
-  //     this.$http.post(`${this.API}/stats`, { id });
-  //   };
+  stat = id => {
+    const { API } = this.$store.state;
+
+    console.log(`${API}/stats ` + id);
+    this.$http.post(`${API}/stats/${id}`);
+  };
 
   decodeHtml(html) {
     const txt = document.createElement("textarea");

@@ -25,7 +25,6 @@ import NewsAll from "./components/News.vue";
 // import Search  from "./components/Search.vue";
 
 // Default configs
-//Vue.prototype.API = 'https://api.haipit.news/api/v2';
 Vue.prototype.DateFns = DateFns;
 Vue.config.productionTip = false;
 
