@@ -42,14 +42,14 @@
   </b-navbar>
 </template>
 
-<script>
-import Search from "./Search";
+<script lang="ts">
+// import Search from "./Search.vue";
 import Vue from "vue";
 import Component from "vue-class-component";
 
 @Component({
   components: {
-    Search
+    // Search
   }
 })
 export default class Navbar extends Vue {}

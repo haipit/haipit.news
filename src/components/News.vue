@@ -29,7 +29,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Post from "./layout/Post.vue";
 import { mapState, mapActions, mapGetters } from "vuex";
 import Vue from "vue";
@@ -39,18 +39,14 @@ import Component from "vue-class-component";
   components: {
     Post
   },
-  computed: {
-    ...mapState(["news", "sources"])
-  },
-  methods: {
-    ...mapActions(["scrollToTop"]),
-    ...mapGetters(["getNews"])
-  },
   props: {
     page: Number
   }
 })
 export default class News extends Vue {
+  page: number;
+  currentPage: number;
+
   // computed
   get data() {
     return {
@@ -59,12 +55,13 @@ export default class News extends Vue {
     };
   }
 
-  mounted() {
-    //console.log(this.news);
+  get news() {
+    return this.$store.state.news;
   }
 
   changePage = moveTo => {
     let page = this.currentPage;
+
     switch (moveTo) {
       case 0:
         if (page > 1) page = page - 1;
@@ -73,14 +70,15 @@ export default class News extends Vue {
         page = page + 1;
         break;
     }
+
     this.clickCallback(page);
   };
 
   clickCallback = pageNum => {
     this.page = pageNum;
     this.currentPage = pageNum;
-    this.scrollToTop();
-    this.getNews(pageNum);
+
+    this.$store.dispatch("scrollToTop");
     this.$store.dispatch("refreshNews", pageNum);
   };
 }

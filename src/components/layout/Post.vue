@@ -47,7 +47,7 @@
   </transition>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
 
@@ -57,10 +57,10 @@ import Component from "vue-class-component";
   }
 })
 export default class Post extends Vue {
-  stat = id => {
-    console.log(`${this.API}/stats ` + id);
-    this.$http.post(`${this.API}/stats`, { id });
-  };
+  //   stat = id => {
+  //     console.log(`${this.API}/stats ` + id);
+  //     this.$http.post(`${this.API}/stats`, { id });
+  //   };
 
   decodeHtml(html) {
     const txt = document.createElement("textarea");

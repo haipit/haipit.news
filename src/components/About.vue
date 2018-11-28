@@ -60,7 +60,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import Sources from "./Sources.vue";
 import Vue from "vue";
 import Component from "vue-class-component";

@@ -1,0 +1,22 @@
+{
+  "defaultSeverity": "warning",
+  "extends": [],
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**"
+    ]
+  },
+  "rules": {
+    "quotemark": false,
+    "indent": false,
+    "interface-name": false,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "no-consecutive-blank-lines": false,
+    "no-console": false,
+    "trailing-comma": false,
+    "newline-per-chained-call": false,
+    "newline-before-return": false,
+    "align": false
+  }
+}
