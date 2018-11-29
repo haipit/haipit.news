@@ -1,9 +1,13 @@
 <template>
   <div class="row blocks">
-    <post v-for="item in news.data" v-bind:item="item" :key="item.id"/>
-    <!--<div class="col-12" v-show="news.data.length() > 0">-->
-    <!--<h2>No results were found. Try changing the keyword!</h2>-->
-    <!--</div>-->
+    <div class="col-12">
+      <div class="list-group">
+        <post transition="fade" v-for="item in news.data" v-bind:item="item" :key="item.id"/>
+      </div>
+    </div>
+    <div class="col-12" v-show="show">
+      <h2>No results were found. Try changing the keyword!</h2>
+    </div>
     <nav class="navbar fixed-bottom">
       <div class="container">
         <div class="col-12 pt-4 text-xs-center">
@@ -30,56 +34,59 @@
 </template>
 
 <script lang="ts">
-import Post from "./layout/Post.vue";
-import { mapState, mapActions, mapGetters } from "vuex";
-import Vue from "vue";
-import Component from "vue-class-component";
+  import Post from "./layout/Post.vue";
+  import Vue from "vue";
+  import Component from "vue-class-component";
 
-@Component({
-  components: {
-    Post
-  },
-  props: {
-    page: Number
-  }
-})
-export default class News extends Vue {
-  page: number;
-  currentPage: number;
+  @Component({
+    components: {
+      Post
+    },
+    props:      {
+      page: Number
+    }
+  })
+  export default class News extends Vue {
+    page: number;
+    currentPage: number;
 
-  // computed
-  get data() {
-    return {
-      currentPage: 1,
-      found: false
-    };
-  }
-
-  get news() {
-    return this.$store.state.news;
-  }
-
-  changePage = moveTo => {
-    let page = this.currentPage;
-
-    switch (moveTo) {
-      case 0:
-        if (page > 1) page = page - 1;
-        break;
-      case 1:
-        page = page + 1;
-        break;
+    // computed
+    static get data() {
+      return {
+        currentPage: 1,
+        found:       false
+      };
     }
 
-    this.clickCallback(page);
-  };
+    get show() {
+      return this.news.length < 1;
+    }
 
-  clickCallback = pageNum => {
-    this.page = pageNum;
-    this.currentPage = pageNum;
+    get news() {
+      return this.$store.state.news;
+    }
 
-    this.$store.dispatch("scrollToTop");
-    this.$store.dispatch("refreshNews", pageNum);
-  };
-}
+    changePage = moveTo => {
+      let page = this.currentPage;
+
+      switch (moveTo) {
+        case 0:
+          if (page > 1) page = page - 1;
+          break;
+        case 1:
+          page = page + 1;
+          break;
+      }
+
+      this.clickCallback(page);
+    };
+
+    clickCallback = pageNum => {
+      this.page = pageNum;
+      this.currentPage = pageNum;
+
+      this.$store.dispatch("scrollToTop");
+      this.$store.dispatch("refreshNews", pageNum);
+    };
+  }
 </script>

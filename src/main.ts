@@ -1,17 +1,21 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import VueResource from "vue-resource";
-import VueMatomo from "vue-matomo";
+import Vue          from "vue";
+import Vuex         from "vuex";
+import VueResource  from "vue-resource";
+import VueMatomo    from "vue-matomo";
 import VueAnalytics from "vue-analytics";
-import VueRouter from "vue-router";
+import VueRouter    from "vue-router";
 import BootstrapVue from "bootstrap-vue";
-import DateFns from "date-fns";
-import Paginate from "vuejs-paginate";
-import VueShortkey from "vue-shortkey";
+import DateFns      from "date-fns";
+import Paginate     from "vuejs-paginate";
+import VueShortkey  from "vue-shortkey";
+import moment       from 'moment'
 
 // Main application
-import App from "./App.vue";
-import store from "./store/store";
+import App               from "./App.vue";
+import store             from "./store/store";
+import interceptorsSetup from './interceptors';
+
+interceptorsSetup();
 
 // Styles and additional modules
 import "bootstrap/dist/css/bootstrap.css";
@@ -21,12 +25,8 @@ import "./assets/scss/theme.scss";
 
 // Pages
 import NewsAll from "./components/News.vue";
-import About from "./components/About.vue";
+import About   from "./components/About.vue";
 // import Search  from "./components/Search.vue";
-
-// Default configs
-Vue.prototype.DateFns = DateFns;
-Vue.config.productionTip = false;
 
 const routes = [
   {path: "/", redirect: "/news"},
@@ -38,6 +38,16 @@ const routes = [
 
 const router = new VueRouter({
   routes // short for `routes: routes`
+});
+
+// Default configs
+Vue.config.productionTip = false;
+
+// Add date format filter
+Vue.filter('formatDate', function (value) {
+  if (value) {
+    return moment(value * 1000).format('YYYY/MM/DD HH:mm:ss')
+  }
 });
 
 Vue.use(Vuex);

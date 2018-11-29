@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card page">
+    <div class="card w-100">
       <div class="card-block p-4 block-item">
         <div class="row">
           <div class="col-12">
@@ -14,8 +14,9 @@
           <div class="col-12">
             <h3>Источники новостей</h3>
           </div>
-          <div class="col-lg-4 d-flex align-items-stretch"  v-for="item in sources.data">
-            <div class="card">
+
+          <div class="col-4 d-flex align-items-stretch" v-for="item in sources.data">
+            <div class="card w-100 mb-4">
               <div class="card-body">
                 <h5>
                   <a v-bind:href="item.link" target="_blank">
@@ -26,6 +27,7 @@
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
