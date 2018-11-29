@@ -21,10 +21,10 @@
 </style>
 
 <script>
-  import Navbar       from "./components/layout/Navbar.vue";
-  import Footer       from "./components/layout/Footer.vue";
-  import Vue          from "vue";
-  import Component    from "vue-class-component";
+  import Navbar    from "./components/layout/Navbar.vue";
+  import Footer    from "./components/layout/Footer.vue";
+  import Vue       from "vue";
+  import Component from "vue-class-component";
 
   @Component({
     components: {
@@ -37,6 +37,11 @@
       this.$store.dispatch("scrollToTop");
       this.$store.dispatch("refreshNews");
       this.$store.dispatch("refreshSources");
-    }
+
+      // Periodically pull news from  backend
+      setInterval(function () {
+        this.$store.dispatch("refreshNews");
+      }.bind(this), 60000);
+    };
   }
 </script>
