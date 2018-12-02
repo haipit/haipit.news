@@ -13,7 +13,7 @@
         <div class="col-12 pt-4 text-xs-center">
           <paginate
             v-model="page"
-            :page-count="news.per_page || 0"
+            :page-count="news.last_page || 0"
             :page-range="3"
             :margin-pages="2"
             :click-handler="clickCallback"
