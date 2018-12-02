@@ -6,8 +6,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state:     {
-    APP_ID:    null,
-    APP_KEY:   null,
+    APP_ID:    1,
+    APP_KEY:   "49257275562a38253442cfa33602a78a737d8d81aa5b4ae604f19f9ac9c8faf1",
     API_TOKEN: null,
     API:       "https://api.haipit.news/api/v2",
     user:      [],
