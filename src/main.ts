@@ -5,7 +5,6 @@ import VueMatomo    from "vue-matomo";
 import VueAnalytics from "vue-analytics";
 import VueRouter    from "vue-router";
 import BootstrapVue from "bootstrap-vue";
-import DateFns      from "date-fns";
 import Paginate     from "vuejs-paginate";
 import VueShortkey  from "vue-shortkey";
 import moment       from 'moment'

@@ -5,9 +5,6 @@
         <post transition="fade" v-for="item in news.data" v-bind:item="item" :key="item.id"/>
       </div>
     </div>
-    <div class="col-12" v-show="show">
-      <h2>No results were found. Try changing the keyword!</h2>
-    </div>
     <nav class="navbar fixed-bottom">
       <div class="container">
         <div class="col-12 pt-4 text-xs-center">
@@ -34,8 +31,8 @@
 </template>
 
 <script lang="ts">
-  import Post from "./layout/Post.vue";
-  import Vue from "vue";
+  import Post      from "./layout/Post.vue";
+  import Vue       from "vue";
   import Component from "vue-class-component";
 
   @Component({
@@ -82,7 +79,7 @@
     };
 
     clickCallback = pageNum => {
-      this.page = pageNum;
+      this.page        = pageNum;
       this.currentPage = pageNum;
 
       this.$store.dispatch("scrollToTop");
