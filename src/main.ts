@@ -4,6 +4,7 @@ import VueResource  from "vue-resource";
 import VueMatomo    from "vue-matomo";
 import VueAnalytics from "vue-analytics";
 import VueRouter    from "vue-router";
+import VueContentPlaceholders from 'vue-content-placeholders'
 import BootstrapVue from "bootstrap-vue";
 import Paginate     from "vuejs-paginate";
 import VueShortkey  from "vue-shortkey";
@@ -49,6 +50,7 @@ Vue.filter('formatDate', function (value) {
   }
 });
 
+Vue.use(VueContentPlaceholders);
 Vue.use(Vuex);
 Vue.use(VueRouter);
 Vue.use(VueShortkey);

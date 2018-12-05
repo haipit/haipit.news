@@ -1,6 +1,16 @@
 <template>
   <div class="row blocks">
-    <div class="col-12">
+    <div class="col-12" v-show="show">
+      <div class="list-group">
+        <div class="list-group-item block-item news p-4 news-placeholder" v-for="i in 10">
+          <content-placeholders>
+            <content-placeholders-heading/>
+            <content-placeholders-text :lines="3"/>
+          </content-placeholders>
+        </div>
+      </div>
+    </div>
+    <div class="col-12" v-show="!show">
       <div class="list-group">
         <post transition="fade" v-for="item in news.data" v-bind:item="item" :key="item.id"/>
       </div>
@@ -29,6 +39,12 @@
     <input type="hidden" v-shortkey="['ctrl', 'arrowright']" @shortkey="changePage(1)">
   </div>
 </template>
+
+<style>
+  .news-placeholder {
+    padding-bottom: 1rem !important;
+  }
+</style>
 
 <script lang="ts">
   import Post      from "./layout/Post.vue";
