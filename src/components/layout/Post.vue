@@ -22,9 +22,10 @@
             </span>
           </td>
           <td>
-            <router-link :to="{path: `/news?src=${item.source.id}`}">
+            <span @click="clickCallback(item.source_id)">
               {{ item.source.title }}
-            </router-link>
+            </span>
+            <!--<router-link :to="{name: 'news', query: {source_id: item.source_id}}" @click="filterSource(item.source_id)"></router-link>-->
           </td>
           <td>
             <span class="text-muted float-md-right">
@@ -50,6 +51,12 @@
     stat = id => {
       const {API} = this.$store.state;
       this.$http.post(`${API}/stats/${id}`);
+    };
+
+    clickCallback = source_id => {
+      this.$store.commit('SET_PAGE', 1);
+      this.$store.commit('SET_SOURCE_ID', source_id);
+      this.$store.dispatch("refreshNews");
     };
   }
 </script>

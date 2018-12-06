@@ -18,7 +18,11 @@
     <nav class="navbar fixed-bottom">
       <div class="container">
         <div class="col-12 pt-4 text-xs-center">
+          <div class="pull-left">
+            <h2 v-if="source !== undefined" @click="noSource"><span class="badge badge-secondary shadow">{{ source.title }}</span></h2>
+          </div>
           <paginate
+            v-show="!show"
             v-model="page"
             :page-count="news.last_page || 0"
             :page-range="3"
@@ -54,21 +58,29 @@
   @Component({
     components: {
       Post
-    },
-    props:      {
-      page: Number
     }
   })
   export default class News extends Vue {
-    page: number;
-    currentPage: number;
-
     // computed
     static get data() {
       return {
         currentPage: 1,
         found:       false
       };
+    }
+
+    get source() {
+      //return (this.sources.length > 1) ? this.sources.data.findIndex(x => x.id === this.source_id) : [];
+      let idx = this.sources.data.findIndex(x => x.id === this.source_id);
+      return this.sources.data[idx];
+    }
+
+    get source_id() {
+      return this.$store.state.source_id;
+    }
+
+    get page() {
+      return this.$store.state.page;
     }
 
     get show() {
@@ -79,8 +91,12 @@
       return this.$store.state.news;
     }
 
+    get sources() {
+      return this.$store.state.sources;
+    }
+
     changePage = moveTo => {
-      let page = this.currentPage;
+      let page = this.page;
 
       switch (moveTo) {
         case 0:
@@ -94,12 +110,16 @@
       this.clickCallback(page);
     };
 
-    clickCallback = pageNum => {
-      this.page        = pageNum;
-      this.currentPage = pageNum;
+    noSource = () => {
+      this.$store.commit('SET_SOURCE_ID', null);
+      this.$store.commit('SET_PAGE', 1);
+      this.$store.dispatch("refreshNews");
+    };
 
+    clickCallback = pageNum => {
+      this.$store.commit('SET_PAGE', pageNum);
       this.$store.dispatch("scrollToTop");
-      this.$store.dispatch("refreshNews", pageNum);
+      this.$store.dispatch("refreshNews");
     };
   }
 </script>

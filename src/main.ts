@@ -1,14 +1,14 @@
-import Vue          from "vue";
-import Vuex         from "vuex";
-import VueResource  from "vue-resource";
-import VueMatomo    from "vue-matomo";
-import VueAnalytics from "vue-analytics";
-import VueRouter    from "vue-router";
+import Vue                    from "vue";
+import Vuex                   from "vuex";
+import VueResource            from "vue-resource";
+import VueMatomo              from "vue-matomo";
+import VueAnalytics           from "vue-analytics";
+import VueRouter              from "vue-router";
 import VueContentPlaceholders from 'vue-content-placeholders'
-import BootstrapVue from "bootstrap-vue";
-import Paginate     from "vuejs-paginate";
-import VueShortkey  from "vue-shortkey";
-import moment       from 'moment'
+import BootstrapVue           from "bootstrap-vue";
+import Paginate               from "vuejs-paginate";
+import VueShortkey            from "vue-shortkey";
+import moment                 from 'moment'
 
 // Main application
 import App               from "./App.vue";
@@ -30,13 +30,23 @@ import About   from "./components/About.vue";
 
 const routes = [
   {path: "/", redirect: "/news"},
-  {path: "/news/:page", component: NewsAll, props: true},
-  {path: "/news", component: NewsAll},
+  //{path: "/news/:page", component: NewsAll, props: true},
+  {
+    name:      'news',
+    path:      '/news',
+    component: NewsAll,
+    props:     (route) => ({
+      page:      route.query.page,
+      source_id: route.query.source_id,
+      query:     route.query.query
+    })
+  },
   //{path: '/search/:keyword', component: Search, props: true},
   {path: '/about', component: About, props: true},
 ];
 
 const router = new VueRouter({
+  mode: 'history',
   routes // short for `routes: routes`
 });
 

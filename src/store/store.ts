@@ -15,6 +15,9 @@ export default new Vuex.Store({
     news:      [],
     content:   [],
     sources:   [],
+    page:      1,
+    source_id: null,
+    query:     null,
     timer:     null,
   },
   mutations: {
@@ -23,6 +26,15 @@ export default new Vuex.Store({
     },
     ADD_SOURCE(state, source) {
       state.sources.push(source);
+    },
+    SET_SOURCE_ID(state, coins) {
+      state.source_id = coins;
+    },
+    SET_QUERY(state, coins) {
+      state.query = coins;
+    },
+    SET_PAGE(state, coins) {
+      state.page = coins;
     },
     SET_USER(state, coins) {
       state.user = coins;
@@ -48,8 +60,8 @@ export default new Vuex.Store({
       const {data} = await axios.get(`/pages/slug/${slug}`);
       commit("SET_CONTENT", data);
     },
-    async refreshNews({commit}, page = 1) {
-      const {data} = await axios.get(`/news?page=${page}`);
+    async refreshNews({commit}) {
+      const {data} = await axios.get(`/news?page=${this.state.page}&source_id=${this.state.source_id}`);
       commit("SET_NEWS", data);
     },
     async refreshSources({commit}, page = 1) {
