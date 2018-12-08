@@ -1,12 +1,9 @@
-FROM evilfreelancer/alpine-apache-php7:php-7.2
-
-ADD [".", "/app"]
+FROM node:alpine as builder
+COPY . /app
 WORKDIR /app
+RUN yarn --production
+RUN yarn build
 
-RUN apk add --update --no-cache nodejs nodejs-npm \
- && npm install \
- && npm run build \
- && chown -R apache:apache /app \
- && cp -r ./dist/* ./public/ \
- && rm -R ./dist/* ./node_modules/ \
- && apk del nodejs nodejs-npm
+FROM nginx:alpine
+COPY --from=builder /app/nginx.conf /etc/nginx/nginx.conf
+COPY --from=builder /app/dist/ /usr/share/nginx/html
