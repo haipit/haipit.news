@@ -1,8 +1,8 @@
 FROM node:alpine as builder
 COPY . /app
 WORKDIR /app
-RUN npm install
-RUN npm build
+RUN npm install --prod
+RUN npm run build
 
 FROM nginx:alpine
 COPY --from=builder /app/nginx.conf /etc/nginx/nginx.conf
