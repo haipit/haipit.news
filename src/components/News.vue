@@ -62,7 +62,7 @@
   })
   export default class News extends Vue {
     // computed
-    static get data() {
+    get data() {
       return {
         currentPage: 1,
         found:       false

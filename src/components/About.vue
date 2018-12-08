@@ -47,7 +47,7 @@
     slug: string;
 
     // computed
-    static get data() {
+    get data() {
       return {
         currentPage: 1,
         found:       false
