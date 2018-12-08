@@ -32,14 +32,14 @@
     "vue-router": "^3.0.2",
     "vue-shortkey": "^3.1.6",
     "vuejs-paginate": "^2.1.0",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "typescript": "^3.2.2",
+    "vue-template-compiler": "^2.5.18"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.2.0",
     "@vue/cli-plugin-typescript": "^3.2.0",
-    "@vue/cli-service": "^3.2.0",
-    "typescript": "^3.2.2",
-    "vue-template-compiler": "^2.5.18"
+    "@vue/cli-service": "^3.2.0"
   },
   "postcss": {
     "plugins": {
