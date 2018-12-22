@@ -48,9 +48,8 @@
     }
   })
   export default class Post extends Vue {
-    stat = id => {
-      const {API} = this.$store.state;
-      this.$http.post(`${API}/stats/${id}`);
+    stat = news_id => {
+      this.$store.dispatch("stat", news_id);
     };
 
     clickCallback = source_id => {

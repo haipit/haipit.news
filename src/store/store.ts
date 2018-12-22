@@ -60,6 +60,9 @@ export default new Vuex.Store({
       const {data} = await axios.get(`/pages/slug/${slug}`);
       commit("SET_CONTENT", data);
     },
+    async stat({commit}, id) {
+      const {data} = await axios.get(`/stats/${id}`);
+    },
     async refreshNews({commit}) {
       const {data} = await axios.get(`/news?page=${this.state.page}&source_id=${this.state.source_id}`);
       commit("SET_NEWS", data);

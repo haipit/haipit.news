@@ -13,7 +13,7 @@
 
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav>
-          <b-nav-item to="/news">Новости</b-nav-item>
+          <b-nav-item to="/">Новости</b-nav-item>
           <b-nav-item to="/about">О проекте</b-nav-item>
         </b-navbar-nav>
 

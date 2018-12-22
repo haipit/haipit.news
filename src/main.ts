@@ -29,11 +29,11 @@ import About   from "./components/About.vue";
 // import Search  from "./components/Search.vue";
 
 const routes = [
-  {path: "/", redirect: "/news"},
-  //{path: "/news/:page", component: NewsAll, props: true},
+  {path: "/news", redirect: "/"},
+  //{path: "/news/:id", component: NewsShow, props: true},
   {
     name:      'news',
-    path:      '/news',
+    path:      '/',
     component: NewsAll,
     props:     (route) => ({
       page:      route.query.page,
