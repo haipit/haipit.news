@@ -12,20 +12,21 @@ export default new Vuex.Store({
     API:       "https://api.haipit.news/api/v2",
     //API:       "http://api.haipit.test/api/v2",
     user:      [],
-    news:      [],
+    news:      {'data': []},
+    popular:   {'week': {'data': []}, 'month': {'data': []}},
     content:   [],
-    sources:   [],
-    page:      1,
+    sources:   {'data': []},
+    page:      {'news': 1, 'popular': {'week': 1, 'month': 1}},
     source_id: null,
     query:     null,
     timer:     null,
   },
   mutations: {
     ADD_NEWS(state, news) {
-      state.news.push(news);
+      state.news.data.push(news);
     },
     ADD_SOURCE(state, source) {
-      state.sources.push(source);
+      state.sources.data.push(source);
     },
     SET_SOURCE_ID(state, coins) {
       state.source_id = coins;
@@ -34,7 +35,7 @@ export default new Vuex.Store({
       state.query = coins;
     },
     SET_PAGE(state, coins) {
-      state.page = coins;
+      state.page.news = coins;
     },
     SET_USER(state, coins) {
       state.user = coins;
@@ -44,6 +45,12 @@ export default new Vuex.Store({
     },
     SET_NEWS(state, coins) {
       state.news = coins;
+    },
+    SET_POP_WEEK(state, coins) {
+      state.popular.week = coins;
+    },
+    SET_POP_MONTH(state, coins) {
+      state.popular.month = coins;
     },
     SET_SOURCES(state, sources) {
       state.sources = sources;
@@ -64,8 +71,16 @@ export default new Vuex.Store({
       const {data} = await axios.post(`/stats/${id}`);
     },
     async refreshNews({commit}) {
-      const {data} = await axios.get(`/news?page=${this.state.page}&source_id=${this.state.source_id}`);
+      const {data} = await axios.get(`/news?page=${this.state.page.news}&source_id=${this.state.source_id}`);
       commit("SET_NEWS", data);
+    },
+    async refreshPopWeek({commit}) {
+      const {data} = await axios.get(`/news/popular/week?page=${this.state.page.popular.week}`);
+      commit("SET_POP_WEEK", data);
+    },
+    async refreshPopMonth({commit}) {
+      const {data} = await axios.get(`/news/popular/month?page=${this.state.page.popular.month}`);
+      commit("SET_POP_MONTH", data);
     },
     async refreshSources({commit}, page = 1) {
       const {data} = await axios.get(`/sources?page=${page}`);

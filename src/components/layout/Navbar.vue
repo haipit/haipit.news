@@ -1,9 +1,7 @@
 <template>
   <b-navbar toggleable="lg" type="light" variant="white" fixed="top" class="navbar-main">
-    <div class="container">
-      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-
-      <b-navbar-brand href="/">
+    <div class="container-fluid">
+      <b-navbar-brand href="/" left>
         <img
           src="@/assets/img/logo-text-sm.png"
           class="d-inline-block align-top"
@@ -15,29 +13,17 @@
         <b-navbar-nav>
           <b-nav-item to="/">Новости</b-nav-item>
           <b-nav-item to="/about">О проекте</b-nav-item>
+          <b-nav-item target="_blank" href="https://modern.haipit.news">Осторожно, модерн!</b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
+          <b-nav-item target="_blank" href="https://discord.gg/J3v93FV">Discord</b-nav-item>
           <b-nav-item target="_blank" href="https://github.com/haipit">GitHub</b-nav-item>
           <b-nav-item target="_blank" href="https://api.haipit.news/api/documentation">API Docs</b-nav-item>
-
-          <!--<search/>-->
-
-          <!--<b-nav-item-dropdown text="Lang" right>-->
-          <!--<b-dropdown-item href="#">EN</b-dropdown-item>-->
-          <!--<b-dropdown-item href="#">ES</b-dropdown-item>-->
-          <!--<b-dropdown-item href="#">RU</b-dropdown-item>-->
-          <!--<b-dropdown-item href="#">FA</b-dropdown-item>-->
-          <!--</b-nav-item-dropdown>-->
-          <!--<b-nav-item-dropdown right>-->
-          <!--<template slot="button-content">-->
-          <!--<em>User</em>-->
-          <!--</template>-->
-          <!--<b-dropdown-item href="#">Profile</b-dropdown-item>-->
-          <!--<b-dropdown-item href="#">Signout</b-dropdown-item>-->
-          <!--</b-nav-item-dropdown>-->
         </b-navbar-nav>
       </b-collapse>
+
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
     </div>
   </b-navbar>
 </template>

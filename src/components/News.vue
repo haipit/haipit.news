@@ -14,7 +14,7 @@
       <div class="col-12" v-show="!loading">
         <div class="list-group">
           <post transition="fade" v-for="item in news.data" v-bind:item="item" :key="item.id"/>
-          <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+          <!--<infinite-loading @infinite="infiniteHandler"></infinite-loading>-->
         </div>
       </div>
       <div class="col-12" v-show="!loading">
@@ -95,11 +95,11 @@
     }
 
     get page() {
-      return this.$store.state.page;
+      return this.$store.state.page.news;
     }
 
     get loading() {
-      return (this.$store.state.news.length < 1);
+      return (this.$store.state.news.data.length === 0);
     }
 
     get news() {

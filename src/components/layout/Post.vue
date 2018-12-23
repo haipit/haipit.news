@@ -1,11 +1,9 @@
 <template>
   <div class="list-group-item block-item news p-4">
     <div class="card-title">
-
-      <p class="text-muted float-md-right small">
+      <p class="text-muted float-md-right small" title="Время публикации новости">
         {{ item.timestamp | formatDate }} {{ item.timestamp | formatTime }}
       </p>
-
       <h5 class="news-link">
         <a target="_blank" class="word-wrap last" v-bind:href="item.link" @click="stat(item.id)">
           {{ item.title }}
@@ -21,7 +19,7 @@
     <div class="card-text">
       <table class="table table-sm table-borderless m-0 w-auto">
         <tr>
-          <td class="pr-2">
+          <td class="pr-2 pl-0">
             <span class="text-muted">
               <i class="fa fa-fw fa-eye"></i>&nbsp;{{ item.clicks_count }}
             </span>

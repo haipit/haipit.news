@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card w-100">
-      <div class="card-block p-4 block-item">
+      <div class="card-block p-4 block-item pb-0">
         <div class="row">
           <div class="col-12">
             <h3 v-html="content.title"></h3>
