@@ -56,7 +56,12 @@ Vue.config.productionTip = false;
 // Add date format filter
 Vue.filter('formatDate', function (value) {
   if (value) {
-    return moment(value * 1000).format('YYYY/MM/DD HH:mm:ss')
+    return moment(value * 1000).format('YYYY/MM/DD')
+  }
+});
+Vue.filter('formatTime', function (value) {
+  if (value) {
+    return moment(value * 1000).format('HH:mm:ss')
   }
 });
 
